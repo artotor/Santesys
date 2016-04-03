@@ -2,7 +2,7 @@ package com.arsoft.santesys.controller;
 
 import java.util.List;
 
-
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,6 +30,7 @@ import com.arsoft.santesys.mundo.UtilidadesMundoInterface;
 public class UtilidadesController 
 {
 
+	private static final Logger logger = Logger.getLogger(UtilidadesController.class);
 	
 	@Autowired
 	private UtilidadesMundoInterface utilidadesMundo;
@@ -38,8 +39,31 @@ public class UtilidadesController
 	
 	@RequestMapping(value = "/utilidadesService/listadoTodosPaises", method = RequestMethod.GET)
 	public List<Pais> getPaises() {
+		
+		logger.info("GENERANDO MENSAJE");
+		logger.debug("getWelcome is executed!");
+				
 		List<Pais> tempo=utilidadesMundo.listadoPaises();
 		return tempo;
+		/*
+		 * Ejemplo retornando el objeto de retorno transaccional que se usará en la funcionalidad.
+		 * public ObjetoRetornoDto getPaises() {
+				ObjetoRetornoDto objeto=new ObjetoRetornoDto();
+				try
+				{
+					List<Pais> tempo=utilidadesMundo.listadoPaises();
+					objeto.setResultadoCorrecto(true);
+					objeto.setResultado(tempo);
+				}
+				catch(Exception e)
+				{
+					objeto.setResultadoCorrecto(false);
+					objeto.setResultado(new ArrayList<>());
+					objeto.setMensaje(e.getMessage());
+				}
+				return objeto;
+			}
+		 */
 	}
 	
 	
