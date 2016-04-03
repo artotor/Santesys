@@ -1,0 +1,39 @@
+#configuracion del datasource
+spring:
+ datasource:
+  url: jdbc:postgresql://localhost:5432/sante
+  username: sante
+  password: sante
+  driverClassName: org.postgresql.Driver
+#configuracion para que escriba las consultas en consola
+spring.jpa:
+ show-sql: true
+#configurar el nivel de loggeo pasa el security de spring
+logging:
+ level:
+  org.springframework.security: DEBUG
+#activiacion de componentes para que funcione con OAuth
+srping:
+ resources:
+  chain:
+   enabled: true
+#configuracion del OAuth
+security:
+ oauth2:
+  client:
+   client-id: acme
+   client-secret: acmesecret
+   scope: read,write
+   auto-approve-scopes: '.*'
+#configuracion del recurso de facebook para seguridad con OAuth
+facebook:
+ client:
+  clientId: 233668646673605
+  clientSecret: 33b17e044ee6a4fa383f46ec6e28ea1d
+  accessTokenUri: https://graph.facebook.com/oauth/access_token
+  userAuthorizationUri: https://www.facebook.com/dialog/oauth
+  tokenName: oauth_token
+  authenticationScheme: query
+  clientAuthenticationScheme: form
+ resource:
+  userInfoUri: https://graph.facebook.com/me
