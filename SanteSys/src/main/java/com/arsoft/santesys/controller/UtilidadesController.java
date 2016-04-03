@@ -40,9 +40,7 @@ public class UtilidadesController
 	@RequestMapping(value = "/utilidadesService/listadoTodosPaises", method = RequestMethod.GET)
 	public List<Pais> getPaises() {
 		
-		logger.info("GENERANDO MENSAJE");
-		logger.debug("getWelcome is executed!");
-				
+		logger.info("consultado el listado de paises");
 		List<Pais> tempo=utilidadesMundo.listadoPaises();
 		return tempo;
 		/*
