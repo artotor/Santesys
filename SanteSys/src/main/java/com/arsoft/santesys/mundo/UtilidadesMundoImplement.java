@@ -37,7 +37,7 @@ import com.arsoft.santesys.utilidades.UtilidadesJPA;
 public class UtilidadesMundoImplement implements UtilidadesMundoInterface
 {
 	
-	protected static Logger logger = Logger.getLogger("UtilidadesService");
+	protected static Logger logger = Logger.getLogger("UtilidadesMundoImplement");
 	
 	@Autowired
 	private ApplicationContext appContext;

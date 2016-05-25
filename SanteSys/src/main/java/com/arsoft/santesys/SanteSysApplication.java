@@ -88,7 +88,8 @@ public class SanteSysApplication extends WebSecurityConfigurerAdapter{
 				.antMatchers("/", 
 						"/login**", 
 						"/webjars/**",
-						"/utilidadesService/**"//por ahora permitiremos que todos los servicios pasen directo.
+						"/utilidadesService/**",//por ahora permitiremos que todos los servicios pasen directo.
+						"/institucionesService/**"//por ahora permitiremos que todos los servicios pasen directo.
 						).permitAll()
 				.anyRequest().authenticated()
 			.and().exceptionHandling().authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/"))

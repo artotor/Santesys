@@ -2,6 +2,9 @@ package com.arsoft.santesys.entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -23,18 +26,22 @@ public class Especialidade implements Serializable {
 	//bi-directional many-to-one association to Institucione
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="institucion", insertable=false, updatable=false)
+	@JsonIgnore
 	private Institucione institucione;
 
 	//bi-directional many-to-many association to ProfesionalesSalud
 	@ManyToMany(mappedBy="especialidades")
+	@JsonIgnore
 	private List<ProfesionalesSalud> profesionalesSaluds;
 
 	//bi-directional many-to-one association to Servicio
 	@OneToMany(mappedBy="especialidade")
+	@JsonIgnore
 	private List<Servicio> servicios;
 
 	//bi-directional many-to-one association to UnidadesConsulta
 	@OneToMany(mappedBy="especialidade")
+	@JsonIgnore
 	private List<UnidadesConsulta> unidadesConsultas;
 
 	public Especialidade() {

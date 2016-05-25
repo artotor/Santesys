@@ -2,6 +2,9 @@ package com.arsoft.santesys.entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -31,10 +34,12 @@ public class Funcionalidade implements Serializable {
 	//bi-directional many-to-one association to Institucione
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="institucion", insertable=false, updatable=false)
+	@JsonIgnore
 	private Institucione institucione;
 
 	//bi-directional many-to-many association to OpcionesMenu
 	@ManyToMany(mappedBy="funcionalidades")
+	@JsonIgnore
 	private List<OpcionesMenu> opcionesMenus;
 
 	//bi-directional many-to-many association to Perfile

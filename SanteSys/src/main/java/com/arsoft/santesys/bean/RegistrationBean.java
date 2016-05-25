@@ -14,6 +14,7 @@ import com.arsoft.santesys.repositorios.CiudadeRepositoryInterface;
 import com.arsoft.santesys.repositorios.DepartamentoRepositoryInterface;
 import com.arsoft.santesys.repositorios.DiasSemanaRespositoryInterface;
 import com.arsoft.santesys.repositorios.EstadosCivilesRespositoryInterface;
+import com.arsoft.santesys.repositorios.InstitucioneRepositoryInterface;
 import com.arsoft.santesys.repositorios.IntegridadDominioRespositoryInterface;
 import com.arsoft.santesys.repositorios.OcupacionesProfesionalRespositoryInterface;
 import com.arsoft.santesys.repositorios.PaisRepositoryInterface;
@@ -75,6 +76,8 @@ public class RegistrationBean {
 	@Autowired
 	private OcupacionesProfesionalRespositoryInterface ocupacionesProfesionalRespository;
 
+	@Autowired
+	private InstitucioneRepositoryInterface institucioneRespository;
 
 
 	public PaisRepositoryInterface getPaisRepository() {
@@ -252,6 +255,18 @@ public class RegistrationBean {
 	public void setOcupacionesProfesionalRespository(
 			OcupacionesProfesionalRespositoryInterface ocupacionesProfesionalRespository) {
 		this.ocupacionesProfesionalRespository = ocupacionesProfesionalRespository;
+	}
+
+
+
+	public InstitucioneRepositoryInterface getInstitucioneRespository() {
+		return institucioneRespository;
+	}
+
+
+
+	public void setInstitucioneRespository(InstitucioneRepositoryInterface institucioneRespository) {
+		this.institucioneRespository = institucioneRespository;
 	}
 
 	
