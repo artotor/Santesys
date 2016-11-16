@@ -15,6 +15,8 @@ public class ViasIngreso implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name="seq_via_ingreso", sequenceName="seq_via_ingreso",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_via_ingreso")
 	private Integer codigo;
 
 	private String identificador;
@@ -24,9 +26,12 @@ public class ViasIngreso implements Serializable {
 	@Column(name="req_resp_paciente")
 	private String reqRespPaciente;
 
+	@Column(name="vian_ingreso_fija")
+	private Integer vianIngresoFija;
+
 	//bi-directional many-to-one association to Institucione
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="institucion", insertable=false, updatable=false)
+	@JoinColumn(name="institucion")
 	private Institucione institucione;
 
 	public ViasIngreso() {
@@ -62,6 +67,14 @@ public class ViasIngreso implements Serializable {
 
 	public void setReqRespPaciente(String reqRespPaciente) {
 		this.reqRespPaciente = reqRespPaciente;
+	}
+
+	public Integer getVianIngresoFija() {
+		return this.vianIngresoFija;
+	}
+
+	public void setVianIngresoFija(Integer vianIngresoFija) {
+		this.vianIngresoFija = vianIngresoFija;
 	}
 
 	public Institucione getInstitucione() {

@@ -1,6 +1,7 @@
 package com.arsoft.santesys.mundo;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.annotation.ManagedBean;
 
@@ -8,16 +9,31 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
+import com.arsoft.santesys.dto.administracion.DtoBarrio;
+import com.arsoft.santesys.dto.administracion.DtoCiudades;
+import com.arsoft.santesys.dto.administracion.DtoDepartamentos;
+import com.arsoft.santesys.dto.administracion.DtoDiasSemana;
+import com.arsoft.santesys.dto.administracion.DtoEstadoCivil;
+import com.arsoft.santesys.dto.administracion.DtoIntegridadDominio;
+import com.arsoft.santesys.dto.administracion.DtoOcupacionProfesional;
+import com.arsoft.santesys.dto.administracion.DtoPaises;
+import com.arsoft.santesys.dto.administracion.DtoSexo;
+import com.arsoft.santesys.dto.administracion.DtoTipoCie;
+import com.arsoft.santesys.dto.administracion.DtoTipoConsultorio;
+import com.arsoft.santesys.dto.administracion.DtoTipoIdentificacion;
+import com.arsoft.santesys.dto.administracion.DtoTipoServicio;
+import com.arsoft.santesys.dto.administracion.DtoTipoVinculacion;
+import com.arsoft.santesys.dto.administracion.DtoTiposArea;
 import com.arsoft.santesys.entidades.Barrio;
 import com.arsoft.santesys.entidades.Ciudade;
 import com.arsoft.santesys.entidades.Departamento;
 import com.arsoft.santesys.entidades.DiasSemana;
+import com.arsoft.santesys.entidades.Especialidade;
 import com.arsoft.santesys.entidades.EstadosCivile;
 import com.arsoft.santesys.entidades.IntegridadDominio;
 import com.arsoft.santesys.entidades.OcupacionesProfesionale;
 import com.arsoft.santesys.entidades.Pais;
 import com.arsoft.santesys.entidades.Sexo;
-import com.arsoft.santesys.entidades.TiposArea;
 import com.arsoft.santesys.entidades.TiposCie;
 import com.arsoft.santesys.entidades.TiposConsultorio;
 import com.arsoft.santesys.entidades.TiposIdentificacion;
@@ -50,11 +66,15 @@ public class UtilidadesMundoImplement implements UtilidadesMundoInterface
 	 * @param codigoDepto
 	 * @return
 	 */
-	public ArrayList<Pais> listadoPaises() 
+	public ArrayList<DtoPaises> listadoPaises() 
 	{
-		ArrayList<Pais> paises=new ArrayList<Pais>();
+		ArrayList<DtoPaises> paises=new ArrayList<DtoPaises>();
 		PaisRepositoryInterface jpa=UtilidadesJPA.obtenerRegistrationBean(appContext).getPaisRepository();
-		paises=jpa.findAll();
+		Iterator<Pais> it=jpa.findAll().iterator();
+		while(it.hasNext())
+		{
+			paises.add(UtilidadesJPA.cargarPaisEntityToDto((Pais)it.next()));
+		}
 		return paises;
 	}
 
@@ -65,117 +85,171 @@ public class UtilidadesMundoImplement implements UtilidadesMundoInterface
 	 * @return
 	 */
 	@Override
-	public ArrayList<Departamento> listadoDepartamentos(Integer codigoPais) {
-		ArrayList<Departamento> departamentos=new ArrayList<Departamento>();
+	public ArrayList<DtoDepartamentos> listadoDepartamentos(Integer codigoPais) {
+		ArrayList<DtoDepartamentos> departamentos=new ArrayList<DtoDepartamentos>();
 		DepartamentoRepositoryInterface jpa=UtilidadesJPA.obtenerRegistrationBean(appContext).getDepartamentoRepository();
-		departamentos=jpa.findByPaisCodigo(codigoPais);
+		Iterator<Departamento> it=jpa.findByPaisCodigo(codigoPais).iterator();
+		while(it.hasNext())
+		{
+			departamentos.add(UtilidadesJPA.cargarDepartamentoEntityToDto(it.next()));
+		}
 		return departamentos;
 	}
 
 	@Override
-	public ArrayList<Ciudade> listadoTodosCiudadesXPaisDepartamento(Integer codigoPais,String codigoDepartamento) 
+	public ArrayList<DtoCiudades> listadoTodosCiudadesXPaisDepartamento(Integer codigoPais,String codigoDepartamento) 
 	{
-		ArrayList<Ciudade> ciudades=new ArrayList<Ciudade>();
-
+		ArrayList<DtoCiudades> ciudades=new ArrayList<DtoCiudades>();
 		CiudadeRepositoryInterface jpa=UtilidadesJPA.obtenerRegistrationBean(appContext).getCiudadRepository();
-		ciudades=jpa.findByIdCodigoPaisAndIdCodigoDepartamento(codigoPais, codigoDepartamento);
+		Iterator<Ciudade> it=jpa.findByIdCodigoPaisAndIdCodigoDepartamento(codigoPais, codigoDepartamento).iterator();
+		while(it.hasNext())
+		{
+			ciudades.add(UtilidadesJPA.cargarCiudadEntityToDto(it.next()));
+		}
 		return ciudades;
 	}
 
 	@Override
-	public ArrayList<Ciudade> listadoCiudadesXPais(Integer codigoPais) {
-		ArrayList<Ciudade> ciudades=new ArrayList<Ciudade>();
-
+	public ArrayList<DtoCiudades> listadoCiudadesXPais(Integer codigoPais) {
+		ArrayList<DtoCiudades> ciudades=new ArrayList<DtoCiudades>();
 		CiudadeRepositoryInterface jpa=UtilidadesJPA.obtenerRegistrationBean(appContext).getCiudadRepository();
-		ciudades=jpa.findByIdCodigoPais(codigoPais);
+		Iterator <Ciudade> it=jpa.findByIdCodigoPais(codigoPais).iterator();
+		while(it.hasNext())
+		{
+			ciudades.add(UtilidadesJPA.cargarCiudadEntityToDto(it.next()));
+		}
 		return ciudades;
 	}
 
 	@Override
-	public ArrayList<Barrio> listadoBarriosXCiudad(Integer codigoPais, String codigoDepartamento, String codigoCiudad) {
-		ArrayList<Barrio> barrios=new ArrayList<Barrio>();
+	public ArrayList<DtoBarrio> listadoBarriosXCiudad(Integer codigoPais, String codigoDepartamento, String codigoCiudad) {
+		ArrayList<DtoBarrio> barrios=new ArrayList<DtoBarrio>();
 		BarrioRepositoryInterface jpa=UtilidadesJPA.obtenerRegistrationBean(appContext).getBarrioRepository();
-		barrios=jpa.findByidCodigoPaisAndIdCodigoDepartamentoAndIdCodigoCiudad(codigoPais, codigoDepartamento, codigoCiudad);
+		Iterator<Barrio> it=jpa.findByidCodigoPaisAndIdCodigoDepartamentoAndIdCodigoCiudad(codigoPais, codigoDepartamento, codigoCiudad).iterator();
+		while(it.hasNext())
+		{
+			barrios.add(UtilidadesJPA.cargarBarrioEntityToDto(it.next()));
+		}		
 		return barrios;
 	}
 
 	@Override
-	public ArrayList<TiposIdentificacion> listadotiposIdentificacion() 
+	public ArrayList<DtoTipoIdentificacion> listadotiposIdentificacion() 
 	{
-		ArrayList<TiposIdentificacion> tipoID=new ArrayList<TiposIdentificacion>();
+		ArrayList<DtoTipoIdentificacion> dto=new ArrayList<DtoTipoIdentificacion>();
 		TiposIdentificacionRepositoryInterface jpa=UtilidadesJPA.obtenerRegistrationBean(appContext).getTiposIDRepository();
-		tipoID=jpa.findAll();
-		return tipoID;
+		Iterator<TiposIdentificacion> it=jpa.findAll().iterator();
+		while(it.hasNext())
+		{
+			dto.add(UtilidadesJPA.cargarTiposIdentificacionEntityToDto(it.next()));
+		}
+		return dto;
 	}
 
 	@Override
-	public ArrayList<TiposArea> listadoTiposAreaInstitucion(Integer codigoInstitucion) {
-		ArrayList<TiposArea> tiposArea=new ArrayList<TiposArea>();
-		tiposArea=(UtilidadesJPA.obtenerRegistrationBean(appContext).getTiposAreaRespository()).findByInstitucioneCodigo(codigoInstitucion);
+	public ArrayList<DtoTiposArea> listadoTiposAreaInstitucion(Integer codigoInstitucion) {
+		ArrayList<DtoTiposArea> tiposArea=new ArrayList<DtoTiposArea>();
+		tiposArea=UtilidadesJPA.cargarListadoTiposAreaEntityToDto((UtilidadesJPA.obtenerRegistrationBean(appContext).getTiposAreaRespository()).findByInstitucioneCodigo(codigoInstitucion));
 		return tiposArea;
 	}
 
 	@Override
-	public ArrayList<EstadosCivile> listadoEstadosCivilesInstitucion(Integer codigoInstitucion) {
-		ArrayList<EstadosCivile> objeto=new ArrayList<EstadosCivile>();
-		objeto=(UtilidadesJPA.obtenerRegistrationBean(appContext).getEstadosCivilesRespository()).findByInstitucioneCodigo(codigoInstitucion);
-		return objeto;
+	public ArrayList<DtoEstadoCivil> listadoEstadosCivilesInstitucion(Integer codigoInstitucion) {
+		ArrayList<DtoEstadoCivil> dto=new ArrayList<DtoEstadoCivil>();
+		Iterator<EstadosCivile> it=(UtilidadesJPA.obtenerRegistrationBean(appContext).getEstadosCivilesRespository()).findByInstitucioneCodigo(codigoInstitucion).iterator();
+		while(it.hasNext())
+		{
+			dto.add(UtilidadesJPA.cargarEstadosCivilesEntityToDto(it.next()));
+		}
+		return dto;		
 	}
 
 	@Override
-	public ArrayList<TiposVinculacion> listadoTiposVinculacionInstitucion(Integer codigoInstitucion) {
-		ArrayList<TiposVinculacion> objeto=new ArrayList<TiposVinculacion>();
-		objeto=(UtilidadesJPA.obtenerRegistrationBean(appContext).getTiposVinculacionRespository()).findByInstitucioneCodigo(codigoInstitucion);
-		return objeto;
+	public ArrayList<DtoTipoVinculacion> listadoTiposVinculacionInstitucion(Integer codigoInstitucion) {
+		ArrayList<DtoTipoVinculacion> dto=new ArrayList<DtoTipoVinculacion>();
+		Iterator<TiposVinculacion> it=(UtilidadesJPA.obtenerRegistrationBean(appContext).getTiposVinculacionRespository()).findByInstitucioneCodigo(codigoInstitucion).iterator();
+		while(it.hasNext())
+		{
+			dto.add(UtilidadesJPA.cargarTipoVinculacionEntityToDto(it.next()));
+		}
+		return dto;
 	}
 
 	@Override
-	public ArrayList<TiposConsultorio> listadoTiposConsultorioInstitucion(Integer codigoInstitucion) {
-		ArrayList<TiposConsultorio> objeto=new ArrayList<TiposConsultorio>();
-		objeto=(UtilidadesJPA.obtenerRegistrationBean(appContext).getTiposConsultorioRespository()).findByInstitucioneCodigo(codigoInstitucion);
-		return objeto;
+	public ArrayList<DtoTipoConsultorio> listadoTiposConsultorioInstitucion(Integer codigoInstitucion) {
+		ArrayList<DtoTipoConsultorio> dto=new ArrayList<DtoTipoConsultorio>();
+		Iterator<TiposConsultorio> it=(UtilidadesJPA.obtenerRegistrationBean(appContext).getTiposConsultorioRespository()).findByInstitucioneCodigo(codigoInstitucion).iterator();
+		while(it.hasNext())
+		{
+			dto.add(UtilidadesJPA.cargarTipoConsultorioEntityToDto(it.next()));
+		}
+		return dto;
 	}
 
 	@Override
-	public ArrayList<DiasSemana> listadoDiasSemanaInstitucion(Integer codigoInstitucion) {
-		ArrayList<DiasSemana> objeto=new ArrayList<DiasSemana>();
-		objeto=(UtilidadesJPA.obtenerRegistrationBean(appContext).getDiasSemanaRespository()).findByInstitucioneCodigo(codigoInstitucion);
-		return objeto;
+	public ArrayList<DtoDiasSemana> listadoDiasSemanaInstitucion(Integer codigoInstitucion) {
+		ArrayList<DtoDiasSemana> dto=new ArrayList<DtoDiasSemana>();
+		Iterator<DiasSemana> it=(UtilidadesJPA.obtenerRegistrationBean(appContext).getDiasSemanaRespository()).findByInstitucioneCodigo(codigoInstitucion).iterator();
+		while(it.hasNext())
+		{
+			dto.add(UtilidadesJPA.cargarDiasSemanaEntityToDto(it.next()));
+		}
+		return dto;
 	}
 
 	@Override
-	public ArrayList<TiposServicio> listadoTiposServicioInstitucion(Integer codigoInstitucion) {
-		ArrayList<TiposServicio> objeto=new ArrayList<TiposServicio>();
-		objeto=(UtilidadesJPA.obtenerRegistrationBean(appContext).getTiposServicioRespository()).findByInstitucioneCodigo(codigoInstitucion);
-		return objeto;
+	public ArrayList<DtoTipoServicio> listadoTiposServicioInstitucion(Integer codigoInstitucion) {
+		ArrayList<DtoTipoServicio> dto=new ArrayList<DtoTipoServicio>();
+		Iterator<TiposServicio> it=(UtilidadesJPA.obtenerRegistrationBean(appContext).getTiposServicioRespository()).findByInstitucioneCodigo(codigoInstitucion).iterator();
+		while(it.hasNext())
+		{
+			dto.add(UtilidadesJPA.cargarTipoServicioEntityToDto(it.next()));
+		}
+		return dto;
 	}
 
 	@Override
-	public ArrayList<Sexo> listadoSexoInstitucion(Integer codigoInstitucion) {
-		ArrayList<Sexo> objeto=new ArrayList<Sexo>();
-		objeto=(UtilidadesJPA.obtenerRegistrationBean(appContext).getSexoRespository()).findByInstitucioneCodigo(codigoInstitucion);
-		return objeto;
+	public ArrayList<DtoSexo> listadoSexoInstitucion(Integer codigoInstitucion) {
+		ArrayList<DtoSexo> dto=new ArrayList<DtoSexo>();
+		Iterator<Sexo> it=(UtilidadesJPA.obtenerRegistrationBean(appContext).getSexoRespository()).findByInstitucioneCodigo(codigoInstitucion).iterator();
+		while(it.hasNext())
+		{
+			dto.add(UtilidadesJPA.cargarSexoEntityToDto(it.next()));
+		}
+		return dto;
 	}
 
 	@Override
-	public ArrayList<IntegridadDominio> listadoIntegridadDominioInstitucion(Integer codigoInstitucion) {
-		ArrayList<IntegridadDominio> objeto=new ArrayList<IntegridadDominio>();
-		objeto=(UtilidadesJPA.obtenerRegistrationBean(appContext).getIntegridadDominioRespository()).findByInstitucioneCodigo(codigoInstitucion);
-		return objeto;
+	public ArrayList<DtoIntegridadDominio> listadoIntegridadDominioInstitucion(Integer codigoInstitucion) {
+		ArrayList<DtoIntegridadDominio> dto=new ArrayList<DtoIntegridadDominio>();
+		Iterator<IntegridadDominio> it=(UtilidadesJPA.obtenerRegistrationBean(appContext).getIntegridadDominioRespository()).findByInstitucioneCodigo(codigoInstitucion).iterator();
+		while(it.hasNext())
+		{
+			dto.add(UtilidadesJPA.cargarIntegridadDominioEntityToDto(it.next()));
+		}
+		return dto;
 	}
 
 	@Override
-	public ArrayList<TiposCie> listadoTiposCieInstitucion(Integer codigoInstitucion) {
-		ArrayList<TiposCie> objeto=new ArrayList<TiposCie>();
-		objeto=(UtilidadesJPA.obtenerRegistrationBean(appContext).getTiposCieRespository()).findByInstitucioneCodigo(codigoInstitucion);
-		return objeto;
+	public ArrayList<DtoTipoCie> listadoTiposCieInstitucion(Integer codigoInstitucion) {
+		ArrayList<DtoTipoCie> dto=new ArrayList<DtoTipoCie>();
+		Iterator<TiposCie> it=(UtilidadesJPA.obtenerRegistrationBean(appContext).getTiposCieRespository()).findByInstitucioneCodigo(codigoInstitucion).iterator();
+		while(it.hasNext())
+		{
+			dto.add(UtilidadesJPA.cargarTipoCieEntityToDto(it.next()));
+		}
+		return dto;
 	}
 
 	@Override
-	public ArrayList<OcupacionesProfesionale> listadoOcupacionesProfesionalInstitucion(Integer codigoInstitucion) {
-		ArrayList<OcupacionesProfesionale> objeto=new ArrayList<OcupacionesProfesionale>();
-		objeto=(UtilidadesJPA.obtenerRegistrationBean(appContext).getOcupacionesProfesionalRespository()).findByInstitucioneCodigo(codigoInstitucion);
-		return objeto;
+	public ArrayList<DtoOcupacionProfesional> listadoOcupacionesProfesionalInstitucion(Integer codigoInstitucion) {
+		ArrayList<DtoOcupacionProfesional> dto=new ArrayList<DtoOcupacionProfesional>();
+		Iterator<OcupacionesProfesionale> it=(UtilidadesJPA.obtenerRegistrationBean(appContext).getOcupacionesProfesionalRespository()).findByInstitucioneCodigo(codigoInstitucion).iterator();
+		while(it.hasNext())
+		{
+			dto.add(UtilidadesJPA.cargarOcupacionProfesionalEntityToDto(it.next()));
+		}
+		return dto;
 	}
 
 	

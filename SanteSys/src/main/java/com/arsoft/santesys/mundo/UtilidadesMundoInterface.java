@@ -2,54 +2,54 @@ package com.arsoft.santesys.mundo;
 
 import java.util.ArrayList;
 
-import com.arsoft.santesys.entidades.Barrio;
-import com.arsoft.santesys.entidades.Ciudade;
-import com.arsoft.santesys.entidades.Departamento;
-import com.arsoft.santesys.entidades.DiasSemana;
-import com.arsoft.santesys.entidades.EstadosCivile;
-import com.arsoft.santesys.entidades.IntegridadDominio;
-import com.arsoft.santesys.entidades.OcupacionesProfesionale;
-import com.arsoft.santesys.entidades.Pais;
-import com.arsoft.santesys.entidades.Sexo;
-import com.arsoft.santesys.entidades.TiposArea;
-import com.arsoft.santesys.entidades.TiposCie;
-import com.arsoft.santesys.entidades.TiposConsultorio;
-import com.arsoft.santesys.entidades.TiposIdentificacion;
-import com.arsoft.santesys.entidades.TiposServicio;
-import com.arsoft.santesys.entidades.TiposVinculacion;
+import com.arsoft.santesys.dto.administracion.DtoBarrio;
+import com.arsoft.santesys.dto.administracion.DtoDiasSemana;
+import com.arsoft.santesys.dto.administracion.DtoEstadoCivil;
+import com.arsoft.santesys.dto.administracion.DtoIntegridadDominio;
+import com.arsoft.santesys.dto.administracion.DtoOcupacionProfesional;
+import com.arsoft.santesys.dto.administracion.DtoSexo;
+import com.arsoft.santesys.dto.administracion.DtoTipoCie;
+import com.arsoft.santesys.dto.administracion.DtoTipoConsultorio;
+import com.arsoft.santesys.dto.administracion.DtoTipoIdentificacion;
+import com.arsoft.santesys.dto.administracion.DtoTipoServicio;
+import com.arsoft.santesys.dto.administracion.DtoTipoVinculacion;
+import com.arsoft.santesys.dto.administracion.DtoCiudades;
+import com.arsoft.santesys.dto.administracion.DtoDepartamentos;
+import com.arsoft.santesys.dto.administracion.DtoPaises;
+import com.arsoft.santesys.dto.administracion.DtoTiposArea;
 
 public interface UtilidadesMundoInterface 
 {
-	public ArrayList<Pais> listadoPaises() ;
+	public ArrayList<DtoPaises> listadoPaises() ;
 
-	public ArrayList<Departamento> listadoDepartamentos(Integer codigoPais);
+	public ArrayList<DtoDepartamentos> listadoDepartamentos(Integer codigoPais);
 
-	public ArrayList<Ciudade> listadoTodosCiudadesXPaisDepartamento(Integer codigoPais,String codigoDepartamento);
+	public ArrayList<DtoCiudades> listadoTodosCiudadesXPaisDepartamento(Integer codigoPais,String codigoDepartamento);
 
-	public ArrayList<Ciudade> listadoCiudadesXPais(Integer codigoPais);
+	public ArrayList<DtoCiudades> listadoCiudadesXPais(Integer codigoPais);
 
-	public ArrayList<Barrio> listadoBarriosXCiudad(Integer codigoPais, String codigoDepartamento, String codigoCiudad);
+	public ArrayList<DtoBarrio> listadoBarriosXCiudad(Integer codigoPais, String codigoDepartamento, String codigoCiudad);
 
-	public ArrayList<TiposIdentificacion> listadotiposIdentificacion();
+	public ArrayList<DtoTipoIdentificacion> listadotiposIdentificacion();
 
-	public ArrayList<TiposArea> listadoTiposAreaInstitucion(Integer codigoInstitucion);
+	public ArrayList<DtoTiposArea> listadoTiposAreaInstitucion(Integer codigoInstitucion);
 
-	public ArrayList<EstadosCivile> listadoEstadosCivilesInstitucion(Integer codigoInstitucion);
+	public ArrayList<DtoEstadoCivil> listadoEstadosCivilesInstitucion(Integer codigoInstitucion);
 
-	public ArrayList<TiposVinculacion> listadoTiposVinculacionInstitucion(Integer codigoInstitucion);
+	public ArrayList<DtoTipoVinculacion> listadoTiposVinculacionInstitucion(Integer codigoInstitucion);
 
-	public ArrayList<TiposConsultorio> listadoTiposConsultorioInstitucion(Integer codigoInstitucion);
+	public ArrayList<DtoTipoConsultorio> listadoTiposConsultorioInstitucion(Integer codigoInstitucion);
 
-	public ArrayList<DiasSemana> listadoDiasSemanaInstitucion(Integer codigoInstitucion);
+	public ArrayList<DtoDiasSemana> listadoDiasSemanaInstitucion(Integer codigoInstitucion);
 
-	public ArrayList<TiposServicio> listadoTiposServicioInstitucion(Integer codigoInstitucion);
+	public ArrayList<DtoTipoServicio> listadoTiposServicioInstitucion(Integer codigoInstitucion);
 
-	public ArrayList<Sexo> listadoSexoInstitucion(Integer codigoInstitucion);
+	public ArrayList<DtoSexo> listadoSexoInstitucion(Integer codigoInstitucion);
 
-	public ArrayList<IntegridadDominio> listadoIntegridadDominioInstitucion(Integer codigoInstitucion);
+	public ArrayList<DtoIntegridadDominio> listadoIntegridadDominioInstitucion(Integer codigoInstitucion);
 
-	public ArrayList<TiposCie> listadoTiposCieInstitucion(Integer codigoInstitucion);
+	public ArrayList<DtoTipoCie> listadoTiposCieInstitucion(Integer codigoInstitucion);
 
-	public ArrayList<OcupacionesProfesionale> listadoOcupacionesProfesionalInstitucion(Integer codigoInstitucion);
+	public ArrayList<DtoOcupacionProfesional> listadoOcupacionesProfesionalInstitucion(Integer codigoInstitucion);
 
 }

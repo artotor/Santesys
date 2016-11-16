@@ -19,13 +19,17 @@ public class Especialidade implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name="seq_especialidades", sequenceName="seq_especialidades",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_especialidades")
 	private Integer codigo;
 
 	private String nombre;
+	
+	private String activo;
 
 	//bi-directional many-to-one association to Institucione
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="institucion", insertable=false, updatable=false)
+	@JoinColumn(name="institucion")
 	@JsonIgnore
 	private Institucione institucione;
 
@@ -122,5 +126,14 @@ public class Especialidade implements Serializable {
 
 		return unidadesConsulta;
 	}
+	
+	public String getActivo() {
+		return this.activo;
+	}
+
+	public void setActivo(String activo) {
+		this.activo = activo;
+	}
+
 
 }

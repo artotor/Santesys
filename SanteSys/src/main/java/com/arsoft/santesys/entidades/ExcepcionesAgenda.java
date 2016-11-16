@@ -16,16 +16,20 @@ public class ExcepcionesAgenda implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name="seq_excep_agenda", sequenceName="seq_excep_agenda",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_excep_agenda")
 	private Integer codigo;
 
 	private String descripcion;
+
+	private String activo;
 
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
 
 	//bi-directional many-to-one association to CentrosAtencion
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="centro_atencion", insertable=false, updatable=false)
+	@JoinColumn(name="centro_atencion")
 	private CentrosAtencion centrosAtencion;
 
 	public ExcepcionesAgenda() {
@@ -62,5 +66,14 @@ public class ExcepcionesAgenda implements Serializable {
 	public void setCentrosAtencion(CentrosAtencion centrosAtencion) {
 		this.centrosAtencion = centrosAtencion;
 	}
+	
+	public String getActivo() {
+		return this.activo;
+	}
+
+	public void setActivo(String activo) {
+		this.activo = activo;
+	}
+
 
 }

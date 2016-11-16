@@ -10,6 +10,16 @@ public class DtoInstituciones
 	/**
 	 * 
 	 */
+	private String tipoIdentificacion;
+	
+	/**
+	 * 
+	 */
+	private DtoCiudades ciudad;
+	
+	/**
+	 * 
+	 */
 	private String codMinSalud;
 	
 	/**
@@ -235,6 +245,23 @@ public class DtoInstituciones
 	public void setTipoInstitucion(String tipoInstitucion) {
 		this.tipoInstitucion = tipoInstitucion;
 	}
+
+	public String getTipoIdentificacion() {
+		return tipoIdentificacion;
+	}
+
+	public void setTipoIdentificacion(String tipoIdentificacion) {
+		this.tipoIdentificacion = tipoIdentificacion;
+	}
+
+	public DtoCiudades getCiudad() {
+		return ciudad;
+	}
+
+	public void setCiudad(DtoCiudades ciudad) {
+		this.ciudad = ciudad;
+	}
+	
 	
 	
 }

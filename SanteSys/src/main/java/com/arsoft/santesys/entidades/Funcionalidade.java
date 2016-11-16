@@ -19,6 +19,8 @@ public class Funcionalidade implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name="seq_funcionalidades", sequenceName="seq_funcionalidades",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_funcionalidades")
 	private Integer codigo;
 
 	private String accion;
@@ -33,7 +35,7 @@ public class Funcionalidade implements Serializable {
 
 	//bi-directional many-to-one association to Institucione
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="institucion", insertable=false, updatable=false)
+	@JoinColumn(name="institucion")
 	@JsonIgnore
 	private Institucione institucione;
 
@@ -47,10 +49,10 @@ public class Funcionalidade implements Serializable {
 	@JoinTable(
 		name="funcionalidades_perfiles"
 		, joinColumns={
-			@JoinColumn(name="codigo_funcionalidad", insertable=false, updatable=false)
+			@JoinColumn(name="codigo_funcionalidad" )
 			}
 		, inverseJoinColumns={
-			@JoinColumn(name="codigo_perfil", insertable=false, updatable=false)
+			@JoinColumn(name="codigo_perfil")
 			}
 		)
 	private List<Perfile> perfiles;

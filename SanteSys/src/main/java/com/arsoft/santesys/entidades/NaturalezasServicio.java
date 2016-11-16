@@ -21,7 +21,7 @@ public class NaturalezasServicio implements Serializable {
 
 	//bi-directional many-to-one association to Institucione
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="institucion", insertable=false, updatable=false)
+	@JoinColumn(name="institucion")
 	private Institucione institucione;
 
 	public NaturalezasServicio() {

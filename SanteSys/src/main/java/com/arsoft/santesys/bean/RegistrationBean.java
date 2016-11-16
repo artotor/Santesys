@@ -8,23 +8,35 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
-
 import com.arsoft.santesys.repositorios.BarrioRepositoryInterface;
+import com.arsoft.santesys.repositorios.CentrosAtencionRepositoryInterface;
+import com.arsoft.santesys.repositorios.CentrosCostoRepositoryInterface;
 import com.arsoft.santesys.repositorios.CiudadeRepositoryInterface;
+import com.arsoft.santesys.repositorios.ConsultoriosRepositoryInterface;
 import com.arsoft.santesys.repositorios.DepartamentoRepositoryInterface;
 import com.arsoft.santesys.repositorios.DiasSemanaRespositoryInterface;
+import com.arsoft.santesys.repositorios.EspecialidadesRepositoryInterface;
 import com.arsoft.santesys.repositorios.EstadosCivilesRespositoryInterface;
+import com.arsoft.santesys.repositorios.ExcepcionesAgendaRepositoryInterface;
+import com.arsoft.santesys.repositorios.FuncionalidadesRepositoryInterface;
+import com.arsoft.santesys.repositorios.GruposServicioRepositoryInterface;
 import com.arsoft.santesys.repositorios.InstitucioneRepositoryInterface;
 import com.arsoft.santesys.repositorios.IntegridadDominioRespositoryInterface;
+import com.arsoft.santesys.repositorios.MotivoCierreAperturaIngresoRepositoryInterface;
+import com.arsoft.santesys.repositorios.NaturalezaServicioRepositoryInterface;
+import com.arsoft.santesys.repositorios.OcupacionesMedicasRepositoryInterface;
 import com.arsoft.santesys.repositorios.OcupacionesProfesionalRespositoryInterface;
 import com.arsoft.santesys.repositorios.PaisRepositoryInterface;
 import com.arsoft.santesys.repositorios.SexoRespositoryInterface;
+import com.arsoft.santesys.repositorios.TarifariosOficialesRepositoryInterface;
 import com.arsoft.santesys.repositorios.TiposAreaRespositoryInterface;
 import com.arsoft.santesys.repositorios.TiposCieRespositoryInterface;
 import com.arsoft.santesys.repositorios.TiposConsultorioRespositoryInterface;
 import com.arsoft.santesys.repositorios.TiposIdentificacionRepositoryInterface;
 import com.arsoft.santesys.repositorios.TiposServicioRespositoryInterface;
 import com.arsoft.santesys.repositorios.TiposVinculacionRespositoryInterface;
+import com.arsoft.santesys.repositorios.UnidadesFuncionaleRepositoryInterface;
+import com.arsoft.santesys.repositorios.ViasIngresoRepositoryInterface;
 
 @Component
 @Configuration
@@ -78,6 +90,59 @@ public class RegistrationBean {
 
 	@Autowired
 	private InstitucioneRepositoryInterface institucioneRespository;
+	
+	@Autowired
+	private UnidadesFuncionaleRepositoryInterface UnidadesFuncionaleRepository;
+	
+	@Autowired
+	private EspecialidadesRepositoryInterface especialidadesRepository;
+	
+	@Autowired
+	private CentrosAtencionRepositoryInterface centrosAtencionRepository;
+	
+	@Autowired
+	private CentrosCostoRepositoryInterface centrosCostoRepository;
+	
+	
+	@Autowired
+	private ExcepcionesAgendaRepositoryInterface excepcionesAgendaRepository;
+	
+	@Autowired
+	private ConsultoriosRepositoryInterface consultoriosRepository;
+
+	@Autowired
+	private TarifariosOficialesRepositoryInterface tarifariosOficialesRepository;
+
+	@Autowired
+	private OcupacionesMedicasRepositoryInterface ocupacionesMedicasRepository;
+
+	@Autowired
+	private GruposServicioRepositoryInterface gruposServicioRepository;
+
+	@Autowired
+	private MotivoCierreAperturaIngresoRepositoryInterface motivoCierreAperturaIngresoRepository;
+
+	@Autowired
+	private ViasIngresoRepositoryInterface viasIngresoRepository;
+
+	@Autowired
+	private NaturalezaServicioRepositoryInterface naturalezaServicioRepository;
+	
+	@Autowired
+	private FuncionalidadesRepositoryInterface funcionalidadesRepository;
+		
+
+
+	public FuncionalidadesRepositoryInterface getFuncionalidadesRepository() {
+		return funcionalidadesRepository;
+	}
+
+
+
+	public void setFuncionalidadesRepository(FuncionalidadesRepositoryInterface funcionalidadesRepository) {
+		this.funcionalidadesRepository = funcionalidadesRepository;
+	}
+
 
 
 	public PaisRepositoryInterface getPaisRepository() {
@@ -269,6 +334,155 @@ public class RegistrationBean {
 		this.institucioneRespository = institucioneRespository;
 	}
 
+
+
+	public UnidadesFuncionaleRepositoryInterface getUnidadesFuncionaleRepository() {
+		return UnidadesFuncionaleRepository;
+	}
+
+
+
+	public void setUnidadesFuncionaleRepository(UnidadesFuncionaleRepositoryInterface unidadesFuncionaleRepository) {
+		this.UnidadesFuncionaleRepository = unidadesFuncionaleRepository;
+	}
+
+
+	
+
+	public EspecialidadesRepositoryInterface getEspecialidadesRepository() {
+		return especialidadesRepository;
+	}
+
+
+
+	public void setEspecialidadesRepository(EspecialidadesRepositoryInterface especialidadesRepository) {
+		this.especialidadesRepository = especialidadesRepository;
+	}
+
+
+
+	public CentrosAtencionRepositoryInterface getCentrosAtencionRepository() {
+		return centrosAtencionRepository;
+	}
+
+
+
+	public void setCentrosAtencionRepository(CentrosAtencionRepositoryInterface centrosAtencionRepository) {
+		this.centrosAtencionRepository = centrosAtencionRepository;
+	}
+
+
+
+	public CentrosCostoRepositoryInterface getCentrosCostoRepository() {
+		return centrosCostoRepository;
+	}
+
+
+
+	public void setCentrosCostoRepository(CentrosCostoRepositoryInterface centrosCostoRepository) {
+		this.centrosCostoRepository = centrosCostoRepository;
+	}
+
+
+
+	public ExcepcionesAgendaRepositoryInterface getExcepcionesAgendaRepository() {
+		return excepcionesAgendaRepository;
+	}
+
+
+
+	public void setExcepcionesAgendaRepository(ExcepcionesAgendaRepositoryInterface excepcionesAgendaRepository) {
+		this.excepcionesAgendaRepository = excepcionesAgendaRepository;
+	}
+
+
+
+	public ConsultoriosRepositoryInterface getConsultoriosRepository() {
+		return consultoriosRepository;
+	}
+
+
+
+	public void setConsultoriosRepository(ConsultoriosRepositoryInterface consultoriosRepository) {
+		this.consultoriosRepository = consultoriosRepository;
+	}
+
+
+
+	public TarifariosOficialesRepositoryInterface getTarifariosOficialesRepository() {
+		return tarifariosOficialesRepository;
+	}
+
+
+
+	public void setTarifariosOficialesRepository(TarifariosOficialesRepositoryInterface tarifariosOficialesRepository) {
+		this.tarifariosOficialesRepository = tarifariosOficialesRepository;
+	}
+
+
+
+	public OcupacionesMedicasRepositoryInterface getOcupacionesMedicasRepository() {
+		return ocupacionesMedicasRepository;
+	}
+
+
+
+	public void setOcupacionesMedicasRepository(OcupacionesMedicasRepositoryInterface ocupacionesMedicasRepository) {
+		this.ocupacionesMedicasRepository = ocupacionesMedicasRepository;
+	}
+
+
+
+	public GruposServicioRepositoryInterface getGruposServicioRepository() {
+		return gruposServicioRepository;
+	}
+
+
+
+	public void setGruposServicioRepository(GruposServicioRepositoryInterface gruposServicioRepository) {
+		this.gruposServicioRepository = gruposServicioRepository;
+	}
+
+
+
+	public MotivoCierreAperturaIngresoRepositoryInterface getMotivoCierreAperturaIngresoRepository() {
+		return motivoCierreAperturaIngresoRepository;
+	}
+
+
+
+	public void setMotivoCierreAperturaIngresoRepository(
+			MotivoCierreAperturaIngresoRepositoryInterface motivoCierreAperturaIngresoRepository) {
+		this.motivoCierreAperturaIngresoRepository = motivoCierreAperturaIngresoRepository;
+	}
+
+
+
+	public ViasIngresoRepositoryInterface getViasIngresoRepository() {
+		return viasIngresoRepository;
+	}
+
+
+
+	public void setViasIngresoRepository(ViasIngresoRepositoryInterface viasIngresoRepository) {
+		this.viasIngresoRepository = viasIngresoRepository;
+	}
+
+
+
+	public NaturalezaServicioRepositoryInterface getNaturalezaServicioRepository() {
+		return naturalezaServicioRepository;
+	}
+
+
+
+	public void setNaturalezaServicioRepository(NaturalezaServicioRepositoryInterface naturalezaServicioRepository) {
+		this.naturalezaServicioRepository = naturalezaServicioRepository;
+	}
+
+
+
+	
 	
 	
 }

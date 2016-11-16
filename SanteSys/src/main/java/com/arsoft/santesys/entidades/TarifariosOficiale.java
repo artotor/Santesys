@@ -16,6 +16,8 @@ public class TarifariosOficiale implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name="seq_tarifarios_oficiales", sequenceName="seq_tarifarios_oficiales",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_tarifarios_oficiales")
 	private Integer codigo;
 
 	private String activo;
@@ -31,7 +33,7 @@ public class TarifariosOficiale implements Serializable {
 
 	//bi-directional many-to-one association to Institucione
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="institucion", insertable=false, updatable=false)
+	@JoinColumn(name="institucion")
 	private Institucione institucione;
 
 	public TarifariosOficiale() {

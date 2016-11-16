@@ -16,13 +16,15 @@ public class OcupacionesMedica implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name="seq_ocupacion_med", sequenceName="seq_ocupacion_med",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_ocupacion_med")
 	private Integer codigo;
 
 	private String nombre;
 
 	//bi-directional many-to-one association to Institucione
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="institucion", insertable=false, updatable=false)
+	@JoinColumn(name="institucion")
 	private Institucione institucione;
 
 	//bi-directional many-to-one association to ProfesionalesSalud

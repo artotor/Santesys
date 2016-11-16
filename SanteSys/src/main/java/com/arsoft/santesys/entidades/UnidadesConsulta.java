@@ -16,6 +16,8 @@ public class UnidadesConsulta implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name="seq_unidad_consulta", sequenceName="seq_unidad_consulta",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_unidad_consulta")
 	private Integer codigo;
 
 	private String activo;

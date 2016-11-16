@@ -15,7 +15,10 @@ import java.util.List;
 public class CentrosAtencion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	
 	@Id
+	@SequenceGenerator(name="seq_centros_aten", sequenceName="seq_centros_aten",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_centros_aten")
 	private Integer codigo;
 
 	private String activo;
@@ -32,15 +35,15 @@ public class CentrosAtencion implements Serializable {
 	//bi-directional many-to-one association to Ciudade
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumns({
-		@JoinColumn(name="codigo_ciudad", referencedColumnName="codigo_ciudad", insertable=false, updatable=false),
-		@JoinColumn(name="codigo_departamento", referencedColumnName="codigo_departamento", insertable=false, updatable=false),
-		@JoinColumn(name="codigo_pais", referencedColumnName="codigo_pais", insertable=false, updatable=false)
+		@JoinColumn(name="codigo_ciudad", referencedColumnName="codigo_ciudad"),
+		@JoinColumn(name="codigo_departamento", referencedColumnName="codigo_departamento"),
+		@JoinColumn(name="codigo_pais", referencedColumnName="codigo_pais")
 		})
 	private Ciudade ciudade;
 
 	//bi-directional many-to-one association to Institucione
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="institucion", insertable=false, updatable=false)
+	@JoinColumn(name="institucion")
 	private Institucione institucione;
 
 	//bi-directional many-to-one association to CentrosCosto

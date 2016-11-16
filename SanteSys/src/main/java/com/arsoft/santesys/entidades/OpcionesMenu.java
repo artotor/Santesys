@@ -31,17 +31,17 @@ public class OpcionesMenu implements Serializable {
 	@JoinTable(
 		name="funcionalidades_menu"
 		, joinColumns={
-			@JoinColumn(name="opcion_menu", insertable=false, updatable=false)
+			@JoinColumn(name="opcion_menu")
 			}
 		, inverseJoinColumns={
-			@JoinColumn(name="funcionalidad", insertable=false, updatable=false)
+			@JoinColumn(name="funcionalidad")
 			}
 		)
 	private List<Funcionalidade> funcionalidades;
 
 	//bi-directional many-to-one association to Menu
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="menu_padre", insertable=false, updatable=false)
+	@JoinColumn(name="menu_padre")
 	private Menu menu;
 
 	public OpcionesMenu() {

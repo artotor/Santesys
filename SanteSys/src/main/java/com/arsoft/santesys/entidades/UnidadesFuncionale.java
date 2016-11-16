@@ -16,6 +16,8 @@ public class UnidadesFuncionale implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name="seq_unidad_func", sequenceName="seq_unidad_func",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_unidad_func")
 	private Integer codigo;
 
 	private String acronimo;
@@ -30,7 +32,7 @@ public class UnidadesFuncionale implements Serializable {
 
 	//bi-directional many-to-one association to Institucione
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="institucion", insertable=false, updatable=false)
+	@JoinColumn(name="institucion")
 	private Institucione institucione;
 
 	public UnidadesFuncionale() {

@@ -16,6 +16,8 @@ public class CentrosCosto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name="seq_centros_costo", sequenceName="seq_centros_costo",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_centros_costo")
 	private Integer codigo;
 
 	private String activo;
@@ -31,17 +33,17 @@ public class CentrosCosto implements Serializable {
 
 	//bi-directional many-to-one association to CentrosAtencion
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="centro_atencion", insertable=false, updatable=false)
+	@JoinColumn(name="centro_atencion")
 	private CentrosAtencion centrosAtencion;
 
 	//bi-directional many-to-one association to TiposArea
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="tipo_area", insertable=false, updatable=false)
+	@JoinColumn(name="tipo_area")
 	private TiposArea tiposArea;
 
 	//bi-directional many-to-one association to UnidadesFuncionale
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="unidad_funcional", insertable=false, updatable=false)
+	@JoinColumn(name="unidad_funcional")
 	private UnidadesFuncionale unidadesFuncionale;
 
 	//bi-directional many-to-many association to Usuario

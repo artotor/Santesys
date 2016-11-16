@@ -15,6 +15,8 @@ public class Consultorio implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name="seq_consultorios", sequenceName="seq_consultorios",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_consultorios")
 	private Integer codigo;
 
 	private String activo;
@@ -26,12 +28,12 @@ public class Consultorio implements Serializable {
 
 	//bi-directional many-to-one association to CentrosAtencion
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="centro_atencion", insertable=false, updatable=false)
+	@JoinColumn(name="centro_atencion")
 	private CentrosAtencion centrosAtencion;
 
 	//bi-directional many-to-one association to TiposConsultorio
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="tipo_consultorio", insertable=false, updatable=false)
+	@JoinColumn(name="tipo_consultorio")
 	private TiposConsultorio tiposConsultorio;
 
 	public Consultorio() {

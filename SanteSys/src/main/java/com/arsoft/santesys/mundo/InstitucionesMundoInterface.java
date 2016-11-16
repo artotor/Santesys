@@ -9,4 +9,6 @@ public interface InstitucionesMundoInterface
 	
 	public DtoInstituciones consultarInstitucion(Integer codigoInstitucion);
 
+	public DtoInstituciones modificarInstitucion(DtoInstituciones institucion);
+
 }

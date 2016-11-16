@@ -16,6 +16,8 @@ public class GruposServicio implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name="seq_grupos_servicio", sequenceName="seq_grupos_servicio",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_grupos_servicio")
 	private Integer codigo;
 
 	private String acronimo;
@@ -26,7 +28,7 @@ public class GruposServicio implements Serializable {
 
 	//bi-directional many-to-one association to Institucione
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="institucion", insertable=false, updatable=false)
+	@JoinColumn(name="institucion")
 	private Institucione institucione;
 
 	//bi-directional many-to-one association to Servicio

@@ -24,7 +24,7 @@ import com.arsoft.santesys.utilidades.UtilidadesJPA;
 public class InstitucionesMundoImplement implements InstitucionesMundoInterface 
 {
 
-protected static Logger logger = Logger.getLogger("InstitucionesMundoImplement");
+	protected static Logger logger = Logger.getLogger("InstitucionesMundoImplement");
 	
 	@Autowired
 	private ApplicationContext appContext;
@@ -38,4 +38,15 @@ protected static Logger logger = Logger.getLogger("InstitucionesMundoImplement")
 		
 	}
 
+
+	@Override
+	public DtoInstituciones modificarInstitucion(DtoInstituciones dto) 
+	{
+		InstitucioneRepositoryInterface jpa=UtilidadesJPA.obtenerRegistrationBean(appContext).getInstitucioneRespository();
+		Institucione e=jpa.save(UtilidadesJPA.cargarInstDtoToEntity(dto));
+		if(e!=null && e.getCodigo()>0)
+			return UtilidadesJPA.cargarInstEntEntityToDto(e);
+		return new DtoInstituciones();
+	}
+	
 }

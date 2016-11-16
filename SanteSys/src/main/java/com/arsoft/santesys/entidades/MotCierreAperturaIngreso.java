@@ -14,9 +14,11 @@ import javax.persistence.*;
 public class MotCierreAperturaIngreso implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private MotCierreAperturaIngresoPK id;
-
+	@Id
+	@SequenceGenerator(name="seq_motcieaping", sequenceName="seq_motcieaping",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_motcieaping")
+	private Integer codigo;
+	
 	private String activo;
 
 	private String descripcion;
@@ -25,20 +27,22 @@ public class MotCierreAperturaIngreso implements Serializable {
 
 	//bi-directional many-to-one association to Institucione
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="institucion", insertable=false, updatable=false)
+	@JoinColumn(name="institucion")
 	private Institucione institucione;
 
 	public MotCierreAperturaIngreso() {
 	}
 
-	public MotCierreAperturaIngresoPK getId() {
-		return this.id;
+
+	public Integer getCodigo() {
+		return this.codigo;
 	}
 
-	public void setId(MotCierreAperturaIngresoPK id) {
-		this.id = id;
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
 	}
 
+	
 	public String getActivo() {
 		return this.activo;
 	}
